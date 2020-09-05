@@ -1,35 +1,22 @@
-const nodemailer = require('nodemailer')
-const mailGun = require('nodemailer-mailgun-transport')
+const mailgun = require('mailgun-js')({
+  apiKey: process.env.MAILGUN_API_KEY,
+  domian: process.env.MAILGUN_DOMAIN
+})
 const { generateResponse } = require('./response')
 
-const mailgunAuth = {
-  auth: {
-    api_key: process.env.MAILGUN_API_KEY,
-    domain: process.env.MAILGUN_DOMAIN
-  }
-}
-
-const smtpTransport = nodemailer.createTransport(mailGun(mailgunAuth))
-
-const sendEmail = (res, receiver, subject, body) => {
-  const mailOptions = {
-    from: 'DevScribble <no-reply@devscribble.com>',
-    to: receiver,
+const sendEmail = (res, from, to, subject, body) => {
+  const data = {
+    from: from,
+    to: to,
     subject: subject,
     html: body
   }
 
-  smtpTransport.sendMail(mailOptions, err => {
+  mailgun.messages().send(data, (err, body) => {
     if (err) {
-      return generateResponse(res, 'fail', 500, err.message)
-    } else {
-      return generateResponse(
-        res,
-        'success',
-        200,
-        `Email has been sent to ${receiver}`
-      )
+      generateResponse(res, 'fail', 400, err.message)
     }
+    return data
   })
 }
 

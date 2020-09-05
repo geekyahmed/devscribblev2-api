@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 const slug = require('mongoose-slug-generator')
 const Schema = mongoose.Schema
+const time = require('time-ago')
 const convertDate = require('../utils/date')
 
 mongoose.plugin(slug)
@@ -19,10 +20,11 @@ const PostSchema = new Schema({
     type: String,
     required: true
   },
-  tags: {
-    type: Array,
-    required: true
-  },
+  tags: [
+    {
+      type: String
+    }
+  ],
   createdAt: {
     type: String,
     default: convertDate()
@@ -55,6 +57,10 @@ const PostSchema = new Schema({
     type: String,
     default: ''
   },
+  minToRead: {
+    type: String,
+    default: ''
+  },
   views: {
     type: Number
   },
@@ -65,6 +71,9 @@ const PostSchema = new Schema({
 })
 
 PostSchema.pre('save', function (next) {
+  const readTime = time.mintoread(this.description, ' mins read')
+  this.minToRead = readTime
+
   this.slug = this.title.split(' ').join('-')
   next()
 })

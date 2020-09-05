@@ -4,8 +4,8 @@
   "description": "the REST-API for devscribble frontend",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon server.js",
-    "prod": "set NODE_ENV=production node server.js",
+    "build": "rimraf dist/ && babel ./ --out-dir dist/ --ignore ./node_modules",
+    "start": "babel --ignore ./node_modules nodemon server.js",
     "test": "mocha"
   },
   "author": "Bankole Ahmed",
@@ -28,6 +28,7 @@
     "helmet": "4.1.0",
     "javascript-time-ago": "2.0.13",
     "jsonwebtoken": "^8.5.1",
+    "mailgun-js": "0.22.0",
     "mongoose": "^5.9.16",
     "mongoose-slug-generator": "^1.0.4",
     "morgan": "^1.10.0",
