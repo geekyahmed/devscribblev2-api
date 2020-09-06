@@ -4,8 +4,7 @@
   "description": "the REST-API for devscribble frontend",
   "main": "server.js",
   "scripts": {
-    "build": "rimraf dist/ && babel ./ --out-dir dist/ --ignore ./node_modules",
-    "start": "babel --ignore ./node_modules nodemon server.js",
+    "start": "nodemon server.js",
     "test": "mocha"
   },
   "author": "Bankole Ahmed",
