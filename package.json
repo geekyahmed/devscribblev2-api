@@ -42,7 +42,6 @@
     "restler": "^3.4.0",
     "router": "^1.3.5",
     "time-ago": "0.2.1",
-    "xss": "1.0.8",
     "xss-clean": "0.1.1"
   },
   "devDependencies": {
