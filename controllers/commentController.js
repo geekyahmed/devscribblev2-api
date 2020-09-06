@@ -8,7 +8,7 @@ module.exports = {
     const slug = req.params.slug
 
     Post.findOne({
-      'slug': slug
+      slug: slug
     }).then(post => {
       const newComment = new Comment({
         full_name: req.body.full_name,
@@ -26,9 +26,11 @@ module.exports = {
   },
   submitAudioComment: (req, res) => {
     const id = req.params.id
-    const $or = [{
-      slug: id
-    }]
+    const $or = [
+      {
+        slug: id
+      }
+    ]
 
     if (ObjectId.isValid(id)) {
       $or.push({
@@ -62,8 +64,6 @@ module.exports = {
           comments: comments
         })
       })
-
-
   },
   deleteComment: (req, res) => {
     const id = req.params.id

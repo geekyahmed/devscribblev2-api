@@ -1,5 +1,5 @@
 const crypto = require('crypto')
-const Token = require('../models/token')
+const Token = require('../models/Token')
 const sendEmail = require('../utils/email')
 
 const sendToken = (req, res, user) => {
