@@ -18,9 +18,13 @@ const convertDate = () => {
 
   var newDate = `${
     month[dateObj.getMonth()]
-  } ${dateObj.getDate()} ${dateObj.getFullYear()}`
+  } ${dateObj.getDate()} ${dateObj.getFullYear()} at ${dateObj.getHours()}:${dateObj.getMinutes()}`
 
-  return newDate
+  if (dateObj.getHours() > 12) {
+    return `${newDate}PM`
+  } else {
+    return `${newDate}AM`
+  }
 }
 
 module.exports = convertDate

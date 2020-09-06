@@ -3,6 +3,8 @@ const express = require('express')
 const { connectDevDB, connectProdDB } = require('./config/db')
 const fileUpload = require('express-fileupload')
 const path = require('path')
+const helmet = require('helmet')
+const xss = require('xss-clean')
 const app = express()
 const handleError = require('./middlewares/errors')
 const routes = require('./routes/routes')
@@ -15,6 +17,10 @@ app.use(express.static(path.join(__dirname, 'public')))
 
 //File Upload Middleware
 app.use(fileUpload())
+
+app.use(helmet())
+
+app.use(xss())
 
 routes(app)
 
