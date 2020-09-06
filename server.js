@@ -48,7 +48,7 @@ app.all('*', function (req, res, next) {
 })
 
 //LIsten To Server and Port Number
-const port = process.env.PORT || 3333
-app.listen(port, () => {
-  console.log(`DevScribble Is Running At ${port}`)
+app.listen(process.env.PORT || 3000, () => {
+  console.log(`DevScribble Is Running At ${process.env.PORT || 3000
+}`)
 })
